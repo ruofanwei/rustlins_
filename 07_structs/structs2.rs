@@ -23,6 +23,24 @@ fn create_order_template() -> Order {
 
 fn main() {
     // You can optionally experiment here.
+    let order_template = create_order_template();
+
+    // 使用 order_template 創建 your_order
+    let your_order = Order {
+        name: String::from("Hacker in Rust"),
+        count: 1,
+        ..order_template
+    };
+
+    
+    // 打印字段值，消除警告
+    println!("Order name: {}", your_order.name);
+    println!("Order year: {}", your_order.year);
+    println!("Made by phone: {}", your_order.made_by_phone);
+    println!("Made by mobile: {}", your_order.made_by_mobile);
+    println!("Made by email: {}", your_order.made_by_email);
+    println!("Item number: {}", your_order.item_number);
+    println!("Count: {}", your_order.count);
 }
 
 #[cfg(test)]
@@ -35,7 +53,11 @@ mod tests {
 
         // TODO: Create your own order using the update syntax and template above!
         // let your_order =
-
+        let your_order = Order {
+            name: String::from("Hacker in Rust"),
+            count: 1,
+            ..order_template
+        };
         assert_eq!(your_order.name, "Hacker in Rust");
         assert_eq!(your_order.year, order_template.year);
         assert_eq!(your_order.made_by_phone, order_template.made_by_phone);

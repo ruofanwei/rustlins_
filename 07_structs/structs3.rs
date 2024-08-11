@@ -24,19 +24,34 @@ impl Package {
     }
 
     // TODO: Add the correct return type to the function signature.
-    fn is_international(&self) {
+    // self 類似於 this
+    // 在 impl 中 第一個參數會是 self
+    fn is_international(&self) -> bool {
         // TODO: Read the tests that use this method to find out when a package
         // is considered international.
+        self.sender_country != self.recipient_country
     }
 
     // TODO: Add the correct return type to the function signature.
-    fn get_fees(&self, cents_per_gram: u32) {
+    fn get_fees(&self, cents_per_gram: u32) -> u32 {
         // TODO: Calculate the package's fees.
+        self.weight_in_grams * cents_per_gram
     }
 }
 
 fn main() {
     // You can optionally experiment here.
+    let cents_per_gram = 3;
+    let package = Package::new(String::from("USA"), String::from("Canada"), 100);
+    
+    println!("Package details: {:?}", package);
+    println!("Is international: {}", package.is_international());
+    
+    let fees = package.get_fees(cents_per_gram);
+    println!("Fees: {} cents", fees);
+
+    let domestic_package = Package::new(String::from("USA"), String::from("USA"), 200);
+    println!("Domestic package is international: {}", domestic_package.is_international());
 }
 
 #[cfg(test)]
